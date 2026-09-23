@@ -10,14 +10,22 @@ needed with pythonapi.
 
 Signed-off-by: Ryan Volz <ryan.volz@gmail.com>
 ---
- bindings/python/iio/__init__.py | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ bindings/python/iio/__init__.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/bindings/python/iio/__init__.py b/bindings/python/iio/__init__.py
-index fc06a58e..2a0f4099 100644
+index fc06a58e..c0d8ce38 100644
 --- a/bindings/python/iio/__init__.py
 +++ b/bindings/python/iio/__init__.py
-@@ -367,7 +367,6 @@ else:
+@@ -35,6 +35,7 @@ from ctypes import (
+     POINTER as _POINTER,
+     CDLL as _cdll,
+     memmove as _memmove,
++    pythonapi as _pythonapi,
+     byref as _byref,
+ )
+ from contextlib import contextmanager
+@@ -367,7 +368,6 @@ else:
  if _lib_loc is None:
      raise OSError(2, "Could not find libiio C library")
  _lib = _cdll(_lib_loc, use_errno=True, use_last_error=True)
@@ -25,12 +33,12 @@ index fc06a58e..2a0f4099 100644
  
  _get_backends_count = _lib.iio_get_builtin_backends_count
  _get_backends_count.restype = c_uint
-@@ -817,7 +816,7 @@ _ev_get_channel.restype = _ChannelPtr
+@@ -817,7 +817,7 @@ _ev_get_channel.restype = _ChannelPtr
  _ev_get_channel.argtypes = (_EventPtr, _DevicePtr, c_bool)
  _ev_get_channel.errcheck = _check_null
  
 -_libc_free = _libc.free
-+_libc_free = ctypes.pythonapi.free
++_libc_free = _pythonapi.free
  _libc_free.argtypes = (c_void_p,)
  
  # pylint: enable=invalid-name
