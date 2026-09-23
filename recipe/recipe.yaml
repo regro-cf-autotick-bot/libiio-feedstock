@@ -196,14 +196,8 @@ outputs:
         - ${{ stdlib("c") }}
       host:
         - if: linux
-          then: bison
-        - if: linux
-          then: flex
-        - if: linux
           then: libaio
         - ${{ pin_subpackage("libiio" + lib_major_version, exact=True) }}
-        - libusb >=1
-        - libxml2-devel
         - zstd
       run:
         - ${{ pin_subpackage("libiio" + lib_major_version, exact=True) }}
