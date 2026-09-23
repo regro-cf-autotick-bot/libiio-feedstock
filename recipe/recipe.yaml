@@ -249,7 +249,7 @@ outputs:
             then: iiod --help
 
 about:
-  license: LGPL-2.1-or-later AND GPL-3.0-or-later${{ " AND Unlicense AND ISC AND BSD-2-Clause" if win else "" }}
+  license: LGPL-2.1-or-later AND GPL-3.0-or-later
   license_file:
     - COPYING.txt
     - COPYING_GPL.txt
@@ -299,4 +299,3 @@ extra:
   feedstock-name: libiio
   recipe-maintainers:
     - ryanvolz
-
