@@ -254,6 +254,8 @@ about:
   license_file:
     - COPYING.txt
     - COPYING_GPL.txt
+    - if: linux
+      then: deps/libini/LICENSE.txt
     - if: win
       then: deps/mdns/LICENSE
     - if: win

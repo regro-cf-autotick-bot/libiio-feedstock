@@ -6,7 +6,6 @@ mkdir build
 cd build
 
 # enable components explicitly so we get build error when unsatisfied
-#  WITH_LOCAL_CONFIG requires libini
 #  WITH_SERIAL_BACKEND requires libserialport
 cmake_config_args=(
     -DCMAKE_BUILD_TYPE=Release
@@ -45,7 +44,7 @@ if [[ $target_platform == linux* ]] ; then
         # IIOD_USBD needs at least kernel 3.18 (sysroot 2.17 has 3.10)
         -DWITH_IIOD_USBD=OFF
         -DWITH_LOCAL_BACKEND=ON
-        -DWITH_LOCAL_CONFIG=OFF
+        -DWITH_LOCAL_CONFIG=ON
         -DWITH_SYSTEMD=OFF
         -DWITH_SYSVINIT=OFF
         -DWITH_UPSTART=OFF
