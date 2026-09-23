@@ -148,7 +148,7 @@ outputs:
               then: iio
           files:
             - if: win
-              then: Library/lib/libiio.lib
+              then: Library/lib/libiio${{ lib_major_version }}.lib
             - ${{ "Library/" if win }}lib/pkgconfig/libiio.pc
 
   - package:
