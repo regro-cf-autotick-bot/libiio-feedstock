@@ -203,7 +203,9 @@ outputs:
         - if: linux
           then: libaio
         - ${{ pin_subpackage("libiio" + lib_major_version, exact=True) }}
-        - zstd
+        # only iiod (Linux-only) ends up linking against zstd
+        - if: linux
+          then: zstd
       run:
         - ${{ pin_subpackage("libiio" + lib_major_version, exact=True) }}
         # recipes still use this output as a host dependency, so depend on dev
