@@ -156,8 +156,7 @@ outputs:
     build:
       string: py_${{ build }}
       noarch: python
-      script:
-        file: python -m pip install -vv bindings/python
+      script: python -m pip install -vv bindings/python
     requirements:
       build:
         # cross-compilation dependencies
