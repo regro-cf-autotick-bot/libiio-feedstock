@@ -195,6 +195,9 @@ outputs:
       files:
         include:
           - ${{ "Library/" if win }}bin/**
+        exclude:
+          - if: win
+            then: Library/bin/libiio.dll
     requirements:
       build:
         - ${{ compiler("c") }}
@@ -224,7 +227,8 @@ outputs:
             - iio_ping
             - iio_reg
             - iio_rwdev
-            - iio_stresstest
+            - if: unix
+              then: iio_stresstest
             - if: linux
               then: iiod
           files:
@@ -245,7 +249,8 @@ outputs:
           - iio_ping --help
           - iio_reg --help
           - iio_rwdev --help
-          - iio_stresstest --help
+          - if: unix
+            then: iio_stresstest --help
           - if: linux
             then: iiod --help
 
