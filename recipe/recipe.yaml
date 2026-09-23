@@ -171,6 +171,9 @@ outputs:
         - setuptools
       run:
         - libiio${{ lib_major_version }} ${{ version }}.*
+        # need libiio-dev dependency because Python bindings search
+        # for the library using the unversioned name
+        - libiio-dev ${{ version }}.*
         - python >=${{ python_min }}
     tests:
       - python:
