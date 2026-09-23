@@ -157,11 +157,9 @@ outputs:
       string: py_${{ build }}
       noarch: python
       script:
-        file: ${{ "build_pylibiio.sh" if not win else "build_pylibiio.bat" }}
+        file: python -m pip install -vv bindings/python
     requirements:
       build:
-        - cmake
-        - ninja
         # cross-compilation dependencies
         - if: build_platform != target_platform
           then: python ${{ python_min }}.*
