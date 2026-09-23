@@ -58,12 +58,6 @@ outputs:
         - ${{ compiler("c") }}
         - ${{ stdlib("c") }}
       host:
-        - if: linux
-          then: bison
-        - if: linux
-          then: flex
-        - if: linux
-          then: libaio
         - libusb >=1
         - libxml2-devel
         - zstd
@@ -102,16 +96,6 @@ outputs:
       build:
         - ${{ compiler("c") }}
         - ${{ stdlib("c") }}
-      host:
-        - if: linux
-          then: bison
-        - if: linux
-          then: flex
-        - if: linux
-          then: libaio
-        - libusb >=1
-        - libxml2-devel
-        - zstd
       run:
         - ${{ pin_subpackage("libiio" + lib_major_version, exact=True) }}
     tests:
@@ -146,17 +130,6 @@ outputs:
       build:
         - ${{ compiler("c") }}
         - ${{ stdlib("c") }}
-      host:
-        - if: linux
-          then: bison
-        - if: linux
-          then: flex
-        - if: linux
-          then: libaio
-        - ${{ pin_subpackage("libiio" + lib_major_version, exact=True) }}
-        - libusb >=1
-        - libxml2-devel
-        - zstd
       run:
         - ${{ pin_subpackage("libiio" + lib_major_version, exact=True) }}
       run_exports:
@@ -165,11 +138,11 @@ outputs:
       - package_contents:
           strict: true
           include:
-            - iio.h
-            - iio-backend.h
-            - iio-debug.h
-            - iio-lock.h
-            - iiod-client.h
+            - iio/iio.h
+            - iio/iio-backend.h
+            - iio/iio-debug.h
+            - iio/iio-lock.h
+            - iio/iiod-client.h
           lib:
             - if: unix
               then: iio
