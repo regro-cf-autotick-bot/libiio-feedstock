@@ -6,8 +6,6 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-libiio:
-- '0'
 libxml2_devel:
 - '2.15'
 python_min:
