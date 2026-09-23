@@ -1,5 +1,5 @@
-{% set version = "0.26" %}
-{% set build = 2 %}
+{% set version = "1.0.0" %}
+{% set build = 0 %}
 
 package:
   name: libiio-split
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/analogdevicesinc/libiio/archive/v{{ version }}.tar.gz
-  sha256: fb445fb860ef1248759f45d4273a4eff360534480ec87af64c6b8db3b99be7e5
+  sha256: b4289bf9971f4a193c8c5f7fb40fbd4bd3f33654936b960b9539c7f2b484e44a
 
 build:
   number: {{ build }}
