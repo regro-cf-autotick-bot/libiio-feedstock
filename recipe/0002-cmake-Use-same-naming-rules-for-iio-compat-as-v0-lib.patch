@@ -1,0 +1,68 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Ryan Volz <ryan.volz@gmail.com>
+Date: Thu, 24 Sep 2026 10:57:53 -0400
+Subject: [PATCH] cmake: Use same naming rules for iio-compat as v0 libiio
+
+This ensures that the compatibility library has the same name as
+produced by the v0 library. With the prior setup, the iio-compat library
+used a .so suffix instead of the .dylib suffix used by v0 libiio.
+
+Instead of setting NO_SONAME and adding the soname manually, this change
+accomplishes not producing the plain ".so" or ".dylib" symlink by
+setting the NAMELINK_SKIP option when the iio-compat target is
+installed.
+
+Signed-off-by: Ryan Volz <ryan.volz@gmail.com>
+---
+ CMakeLists.txt      |  4 ----
+ cmake/Install.cmake | 11 ++++++++++-
+ 2 files changed, 10 insertions(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 105c4ea8..af08deae 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -162,12 +162,8 @@ if (CMAKE_C_COMPILER_ID MATCHES "GNU|Clang|MSVC")
+         set_target_properties(
+             iio-compat
+             PROPERTIES OUTPUT_NAME iio
+-                       NO_SONAME ON
+                        VERSION 0.99
+                        SOVERSION 0)
+-        if (NOT WIN32)
+-            set_target_properties(iio-compat PROPERTIES SUFFIX .so.0)
+-        endif ()
+         if (WITH_GCOV)
+             enable_coverage(iio-compat)
+         endif ()
+diff --git a/cmake/Install.cmake b/cmake/Install.cmake
+index b58a7466..60bac410 100644
+--- a/cmake/Install.cmake
++++ b/cmake/Install.cmake
+@@ -67,13 +67,22 @@ if (NOT SKIP_INSTALL_ALL)
+     install(FILES ${LIBIIO_PC} DESTINATION "${INSTALL_PKGCONFIG_DIR}")
+ 
+     install(
+-        TARGETS iio ${IIO_COMPAT_LIB}
++        TARGETS iio
+         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iio
+         FRAMEWORK DESTINATION ${OSX_INSTALL_FRAMEWORKSDIR})
+ 
++    install(
++        TARGETS ${IIO_COMPAT_LIB}
++        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iio
++        FRAMEWORK DESTINATION ${OSX_INSTALL_FRAMEWORKSDIR}
++        NAMELINK_SKIP)
++
+     if (IIO_UTILS_TARGETS)
+         #install(TARGETS ${IIO_UTILS_TARGETS}
+         #	RUNTIME DESTINATION ${IIO_TESTS_INSTALL_DIR})
+-- 
+2.51.0
+

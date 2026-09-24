@@ -63,11 +63,6 @@ cmake ${CMAKE_ARGS} -G "Ninja" .. "${cmake_config_args[@]}"
 cmake --build . --config Release -- -j${CPU_COUNT}
 cmake --build . --config Release --target install
 
-# fix compatibility library name on macOS
-if [[ $target_platform == osx* ]] ; then
-    mv $PREFIX/lib/libiio.so.0 $PREFIX/lib/libiio.0.dylib
-fi
-
 # add post-link script with instructions for manually linking udev rules
 if [[ $target_platform == linux* ]] ; then
     mkdir -p $PREFIX/bin
