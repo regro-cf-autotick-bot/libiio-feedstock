@@ -55,8 +55,6 @@ outputs:
             then: lib/libiio.${{ lib_major_version }}*.dylib
           - if: win
             then: Library/bin/libiio${{ lib_major_version }}.dll
-          - if: linux
-            then: lib/udev/**
     requirements:
       build:
         - ${{ compiler("c") }}
@@ -75,8 +73,6 @@ outputs:
               then: lib/libiio.${{ lib_major_version }}*.dylib
             - if: win
               then: Library/bin/libiio${{ lib_major_version }}.dll
-            - if: linux
-              then: lib/udev/rules.d/90-libiio.rules
 
   - package:
       # named as such for compatibility with the v0 package,
@@ -198,6 +194,8 @@ outputs:
       files:
         include:
           - ${{ "Library/" if win }}bin/**
+          - if: linux
+            then: lib/udev/**
         exclude:
           - if: win
             then: Library/bin/libiio.dll
@@ -237,6 +235,8 @@ outputs:
           files:
             - if: linux
               then: bin/.libiio-post-link.sh
+            - if: linux
+              then: lib/udev/rules.d/90-libiio.rules
       - python:
           imports:
             - iio
