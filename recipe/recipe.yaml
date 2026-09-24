@@ -14,8 +14,6 @@ source:
   sha256: b4289bf9971f4a193c8c5f7fb40fbd4bd3f33654936b960b9539c7f2b484e44a
   patches:
     - 0001-python-Fall-back-to-searching-for-ucrtbase-if-c-fail.patch
-    - 0002-cmake-Use-same-naming-rules-for-iio-compat-as-v0-lib.patch
-    - 0003-cmake-Make-iio-compat-define-LIBIIO1_NAME-to-exact-t.patch
 
 build:
   number: ${{ build }}
@@ -73,42 +71,6 @@ outputs:
               then: lib/libiio.${{ lib_major_version }}*.dylib
             - if: win
               then: Library/bin/libiio${{ lib_major_version }}.dll
-
-  - package:
-      # named as such for compatibility with the v0 package,
-      # containing only compat lib and not -dev things like it used to
-      name: libiio-c
-      # version needs to start with 0 to satisfy existing dependencies
-      version: "0.99.${{ version }}"
-    inherit:
-      from: libiio-build
-      run_exports: false
-    build:
-      files:
-        include:
-          - if: linux
-            then: lib/libiio.so.0*
-          - if: osx
-            then: lib/libiio.0*.dylib
-          - if: win
-            then: Library/bin/libiio.dll
-    requirements:
-      build:
-        - ${{ compiler("c") }}
-        - ${{ stdlib("c") }}
-      run:
-        - ${{ pin_subpackage("libiio" + lib_major_version, exact=True) }}
-    tests:
-      - package_contents:
-          strict: true
-          files:
-            - if: linux
-              then: lib/libiio.so.0*
-            - if: osx
-              then: lib/libiio.0*.dylib
-            - if: win
-              then: Library/bin/libiio.dll
-      - downstream: libm2k
 
   - package:
       name: libiio-dev
