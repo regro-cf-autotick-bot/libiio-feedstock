@@ -110,6 +110,7 @@ outputs:
               then: lib/libiio.0*.dylib
             - if: win
               then: Library/bin/libiio.dll
+      - downstream: libm2k
 
   - package:
       name: libiio-dev
