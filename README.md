@@ -43,7 +43,7 @@ About libiio
 
 Home: https://github.com/analogdevicesinc/libiio
 
-Package license: LGPL-2.1-or-later AND GPL-3.0-or-later AND Unlicense AND ISC AND BSD-2-Clause
+Package license: LGPL-2.1-or-later AND GPL-3.0-or-later
 
 Summary: Library for interfacing with Linux IIO devices
 
@@ -77,7 +77,7 @@ About libiio-c
 
 Home: https://github.com/analogdevicesinc/libiio
 
-Package license: LGPL-2.1-or-later AND GPL-3.0-or-later AND Unlicense AND ISC AND BSD-2-Clause
+Package license: LGPL-2.1-or-later AND GPL-3.0-or-later
 
 Summary: Library for interfacing with Linux IIO devices
 
@@ -111,7 +111,7 @@ About libiio-dev
 
 Home: https://github.com/analogdevicesinc/libiio
 
-Package license: LGPL-2.1-or-later AND GPL-3.0-or-later AND Unlicense AND ISC AND BSD-2-Clause
+Package license: LGPL-2.1-or-later AND GPL-3.0-or-later
 
 Summary: Library for interfacing with Linux IIO devices
 
@@ -145,7 +145,41 @@ About libiio1
 
 Home: https://github.com/analogdevicesinc/libiio
 
-Package license: LGPL-2.1-or-later AND GPL-3.0-or-later AND Unlicense AND ISC AND BSD-2-Clause
+Package license: LGPL-2.1-or-later AND GPL-3.0-or-later
+
+Summary: Library for interfacing with Linux IIO devices
+
+Development: https://github.com/analogdevicesinc/libiio
+
+Documentation: https://analogdevicesinc.github.io/libiio/
+
+libiio is used to interface to the Linux Industrial Input/Output (IIO) Subsystem. The Linux IIO subsystem is intended to provide support for devices that in some sense are analog to digital or digital to analog converters (ADCs, DACs). This includes, but is not limited to ADCs, Accelerometers, Gyros, IMUs, Capacitance to Digital Converters (CDCs), Pressure Sensors, Color, Light and Proximity Sensors, Temperature Sensors, Magnetometers, DACs, DDS (Direct Digital Synthesis), PLLs (Phase Locked Loops), Variable/Programmable Gain Amplifiers (VGA, PGA), and RF transceivers. You can use libiio natively on an embedded Linux target (local mode), or use libiio to communicate remotely to that same target from a host Linux, Windows or MAC over USB or Ethernet or Serial.
+Packages include:
+
+  - `libiio1` contains the library
+  - `libiio-c` contains the library shim for v0 compatibility
+  - `libiio-dev` contains the development files for compiling against libiio
+  - `pylibiio` contains the Python bindings for libiio
+  - `libiio` contains command line tools and depends on all of the above
+
+For Linux users of `libiio`, you will likely want to link the provided udev rule into your system installation in order for the hardware to have the correct permissions:
+
+    sudo ln -s $CONDA_PREFIX/lib/udev/rules.d/90-libiio.rules /etc/udev/rules.d/
+    sudo udevadm control --reload
+    sudo udevadm trigger
+
+Then, make sure your user account belongs to the plugdev group in order to be able to access your device:
+
+    sudo usermod -a -G plugdev <user>
+
+You may have to restart for this change to take effect.
+
+About pylibiio
+--------------
+
+Home: https://github.com/analogdevicesinc/libiio
+
+Package license: LGPL-2.1-or-later AND GPL-3.0-or-later
 
 Summary: Library for interfacing with Linux IIO devices
 
