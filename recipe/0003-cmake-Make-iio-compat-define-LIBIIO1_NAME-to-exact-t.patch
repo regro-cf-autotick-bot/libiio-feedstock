@@ -15,7 +15,7 @@ Signed-off-by: Ryan Volz <ryan.volz@gmail.com>
  1 file changed, 1 insertion(+), 8 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index af08deae..71fef7be 100644
+index 91d8cd9f..60353daf 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -140,19 +140,12 @@ if (CMAKE_C_COMPILER_ID MATCHES "GNU|Clang|MSVC")
