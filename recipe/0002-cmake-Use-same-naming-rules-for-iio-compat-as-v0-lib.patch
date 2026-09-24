@@ -15,8 +15,8 @@ installed.
 Signed-off-by: Ryan Volz <ryan.volz@gmail.com>
 ---
  CMakeLists.txt      |  4 ----
- cmake/Install.cmake | 11 ++++++++++-
- 2 files changed, 10 insertions(+), 5 deletions(-)
+ cmake/Install.cmake | 10 +++++++++-
+ 2 files changed, 9 insertions(+), 5 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 105c4ea8..af08deae 100644
@@ -36,10 +36,10 @@ index 105c4ea8..af08deae 100644
              enable_coverage(iio-compat)
          endif ()
 diff --git a/cmake/Install.cmake b/cmake/Install.cmake
-index b58a7466..60bac410 100644
+index b58a7466..3cc88ad5 100644
 --- a/cmake/Install.cmake
 +++ b/cmake/Install.cmake
-@@ -67,13 +67,22 @@ if (NOT SKIP_INSTALL_ALL)
+@@ -67,13 +67,21 @@ if (NOT SKIP_INSTALL_ALL)
      install(FILES ${LIBIIO_PC} DESTINATION "${INSTALL_PKGCONFIG_DIR}")
  
      install(
@@ -54,11 +54,10 @@ index b58a7466..60bac410 100644
 +    install(
 +        TARGETS ${IIO_COMPAT_LIB}
 +        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} NAMELINK_SKIP
 +        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 +        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iio
-+        FRAMEWORK DESTINATION ${OSX_INSTALL_FRAMEWORKSDIR}
-+        NAMELINK_SKIP)
++        FRAMEWORK DESTINATION ${OSX_INSTALL_FRAMEWORKSDIR})
 +
      if (IIO_UTILS_TARGETS)
          #install(TARGETS ${IIO_UTILS_TARGETS}
